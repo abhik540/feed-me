@@ -1,26 +1,39 @@
-import { StyleSheet, View, Text, ListRenderItemInfo } from "react-native";
+import { StyleSheet, View, Text, ListRenderItemInfo, Pressable } from "react-native";
 
 interface GoalItemProps {
     goal: ListRenderItemInfo<any>;
+    removeItem: (id: string) => void;
 }
 
 export const GoalItem = ({
-    goal
+    goal,
+    removeItem
 }: GoalItemProps) => {
+
+    const removeItemHandler = (id: any) => {
+        removeItem(id);
+    };
     return (
         <View style={styles.goalItem}>
-        <Text>{goal.item.text}</Text>
-    </View>);
+            <Pressable android_ripple={{ color: '#dddddd' }} onPress={removeItemHandler.bind(this, goal.item.id)} 
+            style={({pressed}) => pressed && styles.pressedItem}>
+                <Text style={styles.goalText}>{goal.item.text}</Text>
+            </Pressable>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
     goalItem: {
         margin: 8,
         borderRadius: 6,
-        backgroundColor: '#5e0acc',
-        padding: 8
+        backgroundColor: '#5e0acc'
+    },
+    pressedItem: {
+        opacity: 0.5
     },
     goalText: {
-        color: 'white'
+        color: 'white',
+        padding: 8
     }
 });

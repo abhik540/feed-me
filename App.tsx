@@ -1,71 +1,12 @@
 import { StyleSheet, View, FlatList, Button, Image } from 'react-native';
-import { useState } from 'react';
-import { GoalItem } from './components/GoalItem';
-import { GoalInput } from './components/GoalInput';
+import { StartGameScreen } from './screens/StartGameScreen';
 
 export default function App() {
 
-  const [goals, setGoals] = useState<any[]>([]);
-  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
-
-  const addGoalHandler = (input: string) => {
-    setGoals((currentGoals) => [...currentGoals, { text: input, id: Math.random().toString() }]);
-  };
-
-  const openModal = () => {
-    setModalVisibility(true);
-  };
-
-  const removeGoal = (id: string) => {
-    setGoals((currentGoals: any[]) => {
-      return (currentGoals.filter((goal) => goal.id !== id))
-    });
-  };
-
   return (
-    <View style={styles.root}>
-      <GoalInput
-        addGoal={addGoalHandler}
-        showModal={modalVisibility}
-        closeModal={() => setModalVisibility(false)} />
-      <View style={styles.flex_3}>
-        <View style={styles.imageView}>
-          <Image source={require('./assets/images/goal_2.png')} style={styles.image}></Image>
-        </View>
-        <Button title='Add New Goal' onPress={openModal}></Button>
-        <FlatList data={goals}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-          renderItem={item => {
-            return (
-              <GoalItem goal={item} removeItem={removeGoal} />
-            );
-          }} alwaysBounceVertical={false}>
-        </FlatList>
-      </View>
-    </View>
+    <StartGameScreen />
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
-    paddingTop: 50,
-    paddingHorizontal: 16,
-    flex: 1,
-    backgroundColor: '#5e0acc',
-  },
-  flex_3: {
-    flex: 5,
-    backgroundColor: '#5e0acc',
-  },
-  imageView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    marginTop: 12,
-    width: 100,
-    height: 100,
-  },
 });

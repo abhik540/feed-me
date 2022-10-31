@@ -32,7 +32,7 @@ export default function App() {
         <View style={styles.imageView}>
           <Image source={require('./assets/images/goal_2.png')} style={styles.image}></Image>
         </View>
-        <Button title='Add New Goal' color="#5e0acc" onPress={openModal}></Button>
+        <Button title='Add New Goal' onPress={openModal}></Button>
         <FlatList data={goals}
           keyExtractor={(item, index) => {
             return item.id;
@@ -50,19 +50,21 @@ export default function App() {
 
 const styles = StyleSheet.create({
   root: {
-    marginTop: 20,
     paddingTop: 50,
     paddingHorizontal: 16,
-    flex: 1
+    flex: 1,
+    backgroundColor: '#5e0acc',
   },
   flex_3: {
-    flex: 5
+    flex: 5,
+    backgroundColor: '#5e0acc',
   },
   imageView: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
+    marginTop: 12,
     width: 100,
     height: 100,
   },

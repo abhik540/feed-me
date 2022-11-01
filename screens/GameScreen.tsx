@@ -1,4 +1,4 @@
-import { StyleSheet, View, TextInput, Button, Modal, Image } from "react-native";
+import { StyleSheet, View, Text, Button, Modal, Image } from "react-native";
 import { useState } from 'react';
 
 interface GameScreenProps {
@@ -7,7 +7,8 @@ interface GameScreenProps {
 export const GameScreen = ({
 }: GameScreenProps) => {
     return (
-        <View></View>
-
+        <View>
+            <Text>Game Screen!</Text>
+        </View>
     );
 };

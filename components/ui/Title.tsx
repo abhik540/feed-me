@@ -2,14 +2,14 @@ import { StyleSheet, Text } from "react-native";
 import { COLORS } from '../../constants/Color';
 
 interface TiteProps {
-    title: string;
+    children: any;
 }
 
 export const Title = ({
-    title
+    children
 }: TiteProps) => {
     return (
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{children}</Text>
     );
 };
 

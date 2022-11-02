@@ -54,7 +54,7 @@ export const GameScreen = ({
 
     return (
         <View style={styles.screen}>
-            <Title title="Opponent's Guess"></Title>
+            <Title>Opponent's Guess</Title>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card>
                 <InstructionText style={styles.instructionText}>Higher or Lower?</InstructionText>

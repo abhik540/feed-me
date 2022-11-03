@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native';
 import { CategoryGridTile } from '../components/CategoryGridTile';
-import { CATEGORIES } from '../data/dummy-data';
+// import { CATEGORIES } from '../data/dummy-data';
 import Category from '../models/Category';
+import { getCategory } from '../service/get';
 
 interface CategoriesScreenProps {
     navigation: any;
@@ -10,6 +12,16 @@ interface CategoriesScreenProps {
 export const CategoriesScreen = ({
     navigation
 }: CategoriesScreenProps) => {
+
+    const[fetchCategories, setCategories] = useState<Category[]>([]);
+
+    useEffect(() => {
+        const getCategories = async () => {
+            const categoires = await getCategory();
+            setCategories(categoires);
+        };
+        getCategories();
+    }, []);
 
     const renderCategoryItem = (itemData: ListRenderItemInfo<Category>) => {
         const onPressHandler = () => {
@@ -24,7 +36,7 @@ export const CategoriesScreen = ({
         );
     };
     return (
-        <FlatList data={CATEGORIES}
+        <FlatList data={fetchCategories}
             keyExtractor={(item) => item.id}
             renderItem={renderCategoryItem}
             numColumns={2} />

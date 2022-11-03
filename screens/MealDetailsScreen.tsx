@@ -5,6 +5,8 @@ import { IconButton } from "../components/IconButton";
 import { useDispatch, useSelector } from "react-redux";
 // import { FavoriteContext } from "../store/context/favorites-context";
 import { addFavorite, removeFavorite } from '../store/redux/favorites';
+import { postCategory } from "../service/post";
+import Category from "../models/Category";
 
 interface MealDetailsScreenProps {
     route: any;
@@ -25,6 +27,7 @@ export const MealDetailsScreen = ({
     const mealIsFavorite = favoriteMealIds.includes(mealId);
 
     const changeFavStateHandler = () => {
+        // postCategory(new Category('3', 'Indian', '#ddf708'));
         if (mealIsFavorite) {
             dispatch(removeFavorite({ id: mealId }));
         } else {

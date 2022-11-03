@@ -1,7 +1,10 @@
 import { StyleSheet, View, Text, Button, Modal, Image } from "react-native";
-import { useLayoutEffect } from 'react';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { Title } from "../components/ui/Title";
 import { IconButton } from "../components/IconButton";
+import { useDispatch, useSelector } from "react-redux";
+// import { FavoriteContext } from "../store/context/favorites-context";
+import { addFavorite, removeFavorite } from '../store/redux/favorites';
 
 interface MealDetailsScreenProps {
     route: any;
@@ -13,21 +16,33 @@ export const MealDetailsScreen = ({
     navigation
 }: MealDetailsScreenProps) => {
 
-    const headerButtonPressHandler = () => {
-        console.log('pressed');
+    const mealId = route.params.mealId;
+    // const favoriteMeals = useContext(FavoriteContext);
+
+    const favoriteMealIds = useSelector((state: any) => state.favoriteMeals.ids);
+    const dispatch = useDispatch();
+
+    const mealIsFavorite = favoriteMealIds.includes(mealId);
+
+    const changeFavStateHandler = () => {
+        if (mealIsFavorite) {
+            dispatch(removeFavorite({ id: mealId }));
+        } else {
+            dispatch(addFavorite({ id: mealId }));
+        }
     };
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => {
-                return <IconButton onPress={headerButtonPressHandler}></IconButton>
+                return <IconButton icon={mealIsFavorite ? 'star' : 'star-outline'} onPress={changeFavStateHandler}></IconButton>
             }
         });
-    }, [navigation]);
+    }, [navigation, changeFavStateHandler]);
 
     return (
         <View>
-            <Title>{route.params.mealId}</Title>
+            <Title>{mealId}</Title>
         </View>
     );
 };

@@ -5,15 +5,17 @@ import { COLORS } from "../constants/Color";
 import { Ionicons } from '@expo/vector-icons';
 
 interface IconButtonProps {
+    icon: any,
     onPress: () => void;
 }
 
 export const IconButton = ({
+    icon,
     onPress
 }: IconButtonProps) => {
     return (
         <Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
-            <Ionicons name="star" size={24} color='white'></Ionicons>
+            <Ionicons name={icon} size={24} color='white'></Ionicons>
         </Pressable>
     );
 };
